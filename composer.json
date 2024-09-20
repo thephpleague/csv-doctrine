@@ -29,17 +29,53 @@
         "league/csv": "^9.7.3",
         "doctrine/collections": "^2.2.0"
     },
+    "require-dev": {
+        "ext-dom": "*",
+        "ext-xdebug": "*",
+        "doctrine/collections": "^2.2.2",
+        "friendsofphp/php-cs-fixer": "^3.64.0",
+        "phpstan/phpstan": "^1.12.3",
+        "phpstan/phpstan-deprecation-rules": "^1.2.1",
+        "phpstan/phpstan-phpunit": "^1.4.0",
+        "phpstan/phpstan-strict-rules": "^1.6.0",
+        "phpunit/phpunit": "^10.5.16 || ^11.3.5",
+        "symfony/var-dumper": "^6.4.6 || ^7.1.4"
+    },
     "replace": {
         "bakame/csv-doctrine-collection-bridge": "*"
     },
     "autoload": {
     	"psr-4": {
-    		"League\\Csv\\Doctrine\\" : ""
+    		"League\\Csv\\Doctrine\\" : "src"
     	}
+    },
+    "scripts": {
+        "phpcs": "PHP_CS_FIXER_IGNORE_ENV=1 php-cs-fixer fix -vvv --diff --dry-run --allow-risky=yes --ansi",
+        "phpcs:fix": "php-cs-fixer fix -vvv --allow-risky=yes --ansi",
+        "phpstan": "phpstan analyse -c phpstan.neon --ansi --memory-limit=192M",
+        "phpunit": "XDEBUG_MODE=coverage phpunit --coverage-text",
+        "phpunit:min": "phpunit --no-coverage",
+        "test": [
+            "@phpunit",
+            "@phpstan",
+            "@phpcs"
+        ]
+    },
+    "scripts-descriptions": {
+        "benchmark": "Runs benchmarks on writing and reader CSV documents",
+        "phpcs": "Runs coding style test suite",
+        "phpstan": "Runs complete codebase static analysis",
+        "phpunit": "Runs unit and functional testing",
+        "test": "Runs full test suite"
+    },
+    "suggest": {
+        "ext-iconv" : "Needed to ease transcoding CSV using iconv stream filters",
+        "ext-dom" : "Required to use the XMLConverter and the HTMLConverter classes",
+        "ext-mbstring": "Needed to ease transcoding CSV using mb stream filters"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev"
+            "dev-master": "9.x-dev"
         }
     },
     "config": {

@@ -1,8 +1,5 @@
-## Sub-split of CSV for Doctrine integration.
+## Doctrine integration for league/csv
 
-> [!CAUTION]  
-> Sub-split of League\Csv.
-> ⚠️ this is a sub-split, for pull requests and issues, visit: https://github.com/thephpleague/csv
 
 ```bash
 composer require league/csv-doctrine
@@ -26,9 +23,7 @@ The following example
 ```php
 <?php
 
-use Doctrine\Common\Collections\Criteria;
-use League\Csv\Doctrine as CsvDoctrine;
-use League\Csv\Reader;
+use Doctrine\Common\Collections\Criteria;use League\Csv\Doctrine as CsvDoctrine;use League\Csv\Reader;
 
 $csv = Reader::createFromPath('/path/to/my/file.csv');
 $csv->setHeaderOffset(0);
@@ -41,7 +36,7 @@ $criteria = Criteria::create()
     ->setMaxResults(10)
 ;
 
-$resultset = CsvDoctrine\CriteriaConverter::convert($criteria)->process($csv);
+$resultset = CsvDoctrine\src\CriteriaConverter::convert($criteria)->process($csv);
 ```
 
 can be written using only the `Statement` class since version `9.16.0`:
